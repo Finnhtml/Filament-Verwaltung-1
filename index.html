@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filament Übersicht</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        header h1 {
+            color: #4CAF50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Filament Übersicht</h1>
+        <a href="login.html" class="button">Admin Login</a>
+    </header>
+
+    <h2>Verfügbare Filamente:</h2>
+    <table id="filamentTable">
+        <thead>
+            <tr>
+                <th>Typ</th>
+                <th>Farbe</th>
+                <th>Menge (g)</th>
+                <th>Verfügbar</th>
+                <th>Kommentar</th>
+                <th>Verbleibend (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Filament-Daten werden hier eingefügt -->
+        </tbody>
+    </table>
+
+    <script>
+        const filaments = JSON.parse(localStorage.getItem("filaments")) || [];
+
+        function renderTable() {
+            const filamentTable = document.querySelector("#filamentTable tbody");
+            filamentTable.innerHTML = "";
+
+            filaments.forEach(filament => {
+                if (filament.verfuegbar) {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${filament.typ}</td>
+                        <td>${filament.farbe}</td>
+                        <td>${filament.menge}</td>
+                        <td>${filament.verfuegbar ? "Ja" : "Nein"}</td>
+                        <td>${filament.kommentar}</td>
+                        <td>${filament.verbleibend}%</td>
+                    `;
+                    filamentTable.appendChild(row);
+                }
+            });
+        }
+
+        renderTable();
+    </script>
+</body>
+</html>
