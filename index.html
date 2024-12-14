@@ -5,95 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filament Übersicht</title>
     <style>
+        /* Grundlegendes Styling */
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
         }
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+        h1 {
+            text-align: center;
+            margin-top: 20px;
         }
-        header h1 {
-            color: #4CAF50;
+        p {
+            text-align: center;
         }
         table {
-            width: 100%;
+            width: 80%;
+            margin: 20px auto;
             border-collapse: collapse;
         }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
         th, td {
+            border: 1px solid #ccc;
             padding: 10px;
             text-align: center;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #007BFF;
+            color: #fff;
         }
-        .button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #4CAF50;
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        a.button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #007BFF;
             color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
             text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
         }
-        .button:hover {
-            background-color: #45a049;
+        a.button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Filament Übersicht</h1>
-        <a href="login.html" class="button">Admin Login</a>
-    </header>
-
-    <h2>Verfügbare Filamente:</h2>
-    <table id="filamentTable">
-        <thead>
-            <tr>
-                <th>Typ</th>
-                <th>Farbe</th>
-                <th>Menge (g)</th>
-                <th>Verfügbar</th>
-                <th>Kommentar</th>
-                <th>Verbleibend (%)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Filament-Daten werden hier eingefügt -->
-        </tbody>
+    <h1>Filament Übersicht</h1>
+    <p>Hier sehen Sie die Filamente, die von den Admins hinzugefügt wurden. Änderungen sind nur für Admins möglich.</p>
+    
+    <!-- Filament-Tabelle -->
+    <table>
+        <tr>
+            <th>Typ</th>
+            <th>Farbe</th>
+            <th>Stückzahl</th>
+            <th>Kommentar</th>
+        </tr>
+        <tr>
+            <td>PLA</td>
+            <td>Rot</td>
+            <td>10</td>
+            <td>Standard Filament</td>
+        </tr>
+        <tr>
+            <td>ABS</td>
+            <td>Blau</td>
+            <td>5</td>
+            <td>Hitzebeständig</td>
+        </tr>
+        <tr>
+            <td>PETG</td>
+            <td>Transparent</td>
+            <td>8</td>
+            <td>Stark und flexibel</td>
+        </tr>
     </table>
 
-    <script>
-        const filaments = JSON.parse(localStorage.getItem("filaments")) || [];
-
-        function renderTable() {
-            const filamentTable = document.querySelector("#filamentTable tbody");
-            filamentTable.innerHTML = "";
-
-            filaments.forEach(filament => {
-                if (filament.verfuegbar) {
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
-                        <td>${filament.typ}</td>
-                        <td>${filament.farbe}</td>
-                        <td>${filament.menge}</td>
-                        <td>${filament.verfuegbar ? "Ja" : "Nein"}</td>
-                        <td>${filament.kommentar}</td>
-                        <td>${filament.verbleibend}%</td>
-                    `;
-                    filamentTable.appendChild(row);
-                }
-            });
-        }
-
-        renderTable();
-    </script>
+    <!-- Admin Login Link -->
+    <a href="login.html" class="button">Admin Login</a>
 </body>
 </html>
